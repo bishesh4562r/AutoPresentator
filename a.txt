@@ -1,1 +1,0 @@
-file '/Users/user/Desktop/ds.ppsx' is not a PowerPoint file, content type is 'application/vnd.openxmlformats-officedocument.presentationml.slideshow.main+xml'

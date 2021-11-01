@@ -4,13 +4,14 @@ import pyttsx3
 import time
 import subprocess
 from pptx import Presentation
+
 import glob
 from pptx.enum.action import PP_ACTION
 from tkinter import filedialog
 from ttkthemes import themed_tk as tk
 import threading
 import pyautogui as pg
-
+import os
 # configuring the audio and tts engine
 engine=pyttsx3.init()
 voices=engine.getProperty('voices')
@@ -42,10 +43,11 @@ textn=StringVar()
 
 def open_file():
     global a
-    root.a=filedialog.askopenfilename(initialdir="/",title="Open Presentation",filetypes= [('Presentation Files', '*.pptx')] )
+    root.a=filedialog.askopenfilename(initialdir="/",title="Open Presentation",filetypes= [('Presentation Files', '*.pptx'),('Presentation Files','*ppt')] )
     a=root.a
 
     nlayout=Label(root,text=a,font="Helvetica 18 bold italic").pack()
+       
     
 
 nopfile=Button(root,text="Open File",command=open_file).pack()
@@ -56,11 +58,11 @@ def click():
     try:
 
         for eachfile in glob.glob(a):
-                # subprocess.call(["open",a])
-                # messagebox.showinfo("Confirm","After Clicking okay you may need to start slideshow manually and wait  a few seconds")
+               
                 t1=threading.Thread(target=subprocess.call(["open",a]))
                 t1.start()
-                time.sleep(5)
+                #pg.hotkey('command','shift','enter')
+                time.sleep(10)
 
                 prs = Presentation(eachfile)
             
@@ -113,6 +115,7 @@ nButton.pack()
 nButton.bind("<Enter>",entered)
 nButton.bind("<Leave>",left)
 
+root.layou=Label(text="open a .pptx file, start the presentation and wait..",font="Helvetica  18 bold italic").pack()
 
 root.layoutn=Label(text="Made BY BISHESH BOHORA @2020 V1.1",font="Helvetica  18 bold italic").pack()
 
